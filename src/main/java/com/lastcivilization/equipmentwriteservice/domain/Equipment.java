@@ -1,5 +1,6 @@
 package com.lastcivilization.equipmentwriteservice.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class Equipment {
@@ -97,7 +98,7 @@ class Equipment {
         private Long pants;
         private Long weapon;
         private Long shield;
-        private List<BackpackItem> backpack;
+        private List<BackpackItem> backpack = new ArrayList<>();
 
         private Builder() {
         }
