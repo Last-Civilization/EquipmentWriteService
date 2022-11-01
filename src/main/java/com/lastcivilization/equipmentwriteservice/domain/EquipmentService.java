@@ -1,5 +1,6 @@
 package com.lastcivilization.equipmentwriteservice.domain;
 
+import com.lastcivilization.equipmentwriteservice.domain.exception.EquipmentNotFoundException;
 import com.lastcivilization.equipmentwriteservice.domain.port.EquipmentRepositoryPort;
 import com.lastcivilization.equipmentwriteservice.domain.view.EquipmentModel;
 
@@ -19,5 +20,22 @@ public class EquipmentService {
 
     public void deleteEquipment(long id){
         equipmentRepository.deleteById(id);
+    }
+
+    public EquipmentModel setHelmet(long id){
+        Equipment equipment = getEquipment(id);
+        equipment.setHelmet(id);
+        EquipmentModel equipmentModel = Mapper.toModel(equipment);
+        return equipmentRepository.save(equipmentModel);
+    }
+
+    private Equipment getEquipment(long id){
+        EquipmentModel equipmentModel = getEquipmentModel(id);
+        return Mapper.toDomain(equipmentModel);
+    }
+
+    private EquipmentModel getEquipmentModel(long id) {
+        return equipmentRepository.findById(id)
+                .orElseThrow(() -> new EquipmentNotFoundException(id));
     }
 }

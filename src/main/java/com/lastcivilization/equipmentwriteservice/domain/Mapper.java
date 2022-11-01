@@ -34,4 +34,8 @@ class Mapper {
                 backpackItem.getAmount()
         );
     }
+
+    public static Equipment toDomain(EquipmentModel equipmentModel) {
+        return null;
+    }
 }
