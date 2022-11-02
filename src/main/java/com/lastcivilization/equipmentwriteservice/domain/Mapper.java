@@ -28,7 +28,7 @@ final class Mapper {
     private static List<BackpackItemModel> toModel(List<BackpackItem> backpack){
         return backpack.stream()
                 .map(Mapper::toModel)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private static BackpackItemModel toModel(BackpackItem backpackItem) {
@@ -40,6 +40,29 @@ final class Mapper {
     }
 
     public static Equipment toDomain(EquipmentModel equipmentModel) {
-        return null;
+        return Equipment.Builder.anEquipment()
+                .id(equipmentModel.id())
+                .helmet(equipmentModel.helmet())
+                .armor(equipmentModel.armor())
+                .boots(equipmentModel.boots())
+                .pants(equipmentModel.pants())
+                .weapon(equipmentModel.weapon())
+                .shield(equipmentModel.shield())
+                .backpack(toDomain(equipmentModel.backpack()))
+                .build();
+    }
+
+    private static List<BackpackItem> toDomain(List<BackpackItemModel> backpack) {
+        return backpack.stream()
+                .map(Mapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    private static BackpackItem toDomain(BackpackItemModel backpackItemModel) {
+        return BackpackItem.Builder.aBackpackItem()
+                .id(backpackItemModel.id())
+                .itemId(backpackItemModel.itemId())
+                .amount(backpackItemModel.amount())
+                .build();
     }
 }
