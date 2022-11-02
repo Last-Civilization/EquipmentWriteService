@@ -4,7 +4,7 @@ import com.lastcivilization.equipmentwriteservice.domain.view.EquipmentModel;
 
 import java.util.Optional;
 
-public interface EquipmentRepositoryPort {
+public interface EquipmentRepository {
 
     EquipmentModel save(EquipmentModel equipmentModel);
     void deleteById(long id);
