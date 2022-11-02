@@ -8,6 +8,10 @@ import java.util.stream.Collectors;
 
 class Mapper {
 
+    private Mapper(){
+        throw new RuntimeException("You can not create instance of this class!");
+    }
+
     static EquipmentModel toModel(Equipment equipment){
         return new EquipmentModel(
                 equipment.getId(),
