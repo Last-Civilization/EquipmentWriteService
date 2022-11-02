@@ -4,7 +4,7 @@ import com.lastcivilization.equipmentwriteservice.domain.exception.EquipmentNotF
 import com.lastcivilization.equipmentwriteservice.domain.port.EquipmentRepositoryPort;
 import com.lastcivilization.equipmentwriteservice.domain.view.EquipmentModel;
 
-public class EquipmentService {
+public class EquipmentService{
 
     private final EquipmentRepositoryPort equipmentRepository;
 

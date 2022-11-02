@@ -6,7 +6,7 @@ import com.lastcivilization.equipmentwriteservice.domain.view.EquipmentModel;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class Mapper {
+final class Mapper {
 
     private Mapper(){
         throw new RuntimeException("You can not create instance of this class!");
