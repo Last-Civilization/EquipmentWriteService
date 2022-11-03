@@ -8,17 +8,17 @@ class Equipment {
     private Long id;
     private Long helmet;
     private Long armor;
-    private Long boots;
+    private Long shoes;
     private Long pants;
     private Long weapon;
     private Long shield;
     private List<BackpackItem> backpack;
 
-    public Equipment(Long id, Long helmet, Long armor, Long boots, Long pants, Long weapon, Long shield, List<BackpackItem> backpack) {
+    public Equipment(Long id, Long helmet, Long armor, Long shoes, Long pants, Long weapon, Long shield, List<BackpackItem> backpack) {
         this.id = id;
         this.helmet = helmet;
         this.armor = armor;
-        this.boots = boots;
+        this.shoes = shoes;
         this.pants = pants;
         this.weapon = weapon;
         this.shield = shield;
@@ -49,12 +49,12 @@ class Equipment {
         this.armor = armor;
     }
 
-    public Long getBoots() {
-        return boots;
+    public Long getShoes() {
+        return shoes;
     }
 
-    public void setBoots(Long boots) {
-        this.boots = boots;
+    public void setShoes(Long shoes) {
+        this.shoes = shoes;
     }
 
     public Long getPants() {
@@ -94,7 +94,7 @@ class Equipment {
         private Long id;
         private Long helmet;
         private Long armor;
-        private Long boots;
+        private Long shoes;
         private Long pants;
         private Long weapon;
         private Long shield;
@@ -122,8 +122,8 @@ class Equipment {
             return this;
         }
 
-        public Builder boots(Long boots) {
-            this.boots = boots;
+        public Builder shoes(Long shoes) {
+            this.shoes = shoes;
             return this;
         }
 
@@ -148,7 +148,7 @@ class Equipment {
         }
 
         public Equipment build() {
-            return new Equipment(id, helmet, armor, boots, pants, weapon, shield, backpack);
+            return new Equipment(id, helmet, armor, shoes, pants, weapon, shield, backpack);
         }
     }
 }

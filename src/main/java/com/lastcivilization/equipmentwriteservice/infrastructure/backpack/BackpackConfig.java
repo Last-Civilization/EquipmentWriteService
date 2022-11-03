@@ -1,9 +1,11 @@
 package com.lastcivilization.equipmentwriteservice.infrastructure.backpack;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 @ConfigurationProperties(prefix = "backpack")
-class BackpackConfig {
+@Component
+public class BackpackConfig {
 
     private int size;
 

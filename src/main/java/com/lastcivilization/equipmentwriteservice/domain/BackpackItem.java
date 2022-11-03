@@ -4,12 +4,10 @@ class BackpackItem {
 
     private Long id;
     private Long itemId;
-    private int amount;
 
-    public BackpackItem(Long id, Long itemId, int amount) {
+    public BackpackItem(Long id, Long itemId) {
         this.id = id;
         this.itemId = itemId;
-        this.amount = amount;
     }
 
     public Long getId() {
@@ -28,19 +26,10 @@ class BackpackItem {
         this.itemId = itemId;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     public static final class Builder {
 
         private Long id;
         private Long itemId;
-        private int amount;
 
         private Builder() {
         }
@@ -59,13 +48,8 @@ class BackpackItem {
             return this;
         }
 
-        public Builder amount(int amount) {
-            this.amount = amount;
-            return this;
-        }
-
         public BackpackItem build() {
-            return new BackpackItem(id, itemId, amount);
+            return new BackpackItem(id, itemId);
         }
     }
 }

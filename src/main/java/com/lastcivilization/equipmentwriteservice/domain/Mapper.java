@@ -17,7 +17,7 @@ final class Mapper {
                 equipment.getId(),
                 equipment.getHelmet(),
                 equipment.getArmor(),
-                equipment.getBoots(),
+                equipment.getShoes(),
                 equipment.getPants(),
                 equipment.getWeapon(),
                 equipment.getShield(),
@@ -34,8 +34,7 @@ final class Mapper {
     private static BackpackItemModel toModel(BackpackItem backpackItem) {
         return new BackpackItemModel(
                 backpackItem.getId(),
-                backpackItem.getItemId(),
-                backpackItem.getAmount()
+                backpackItem.getItemId()
         );
     }
 
@@ -44,7 +43,7 @@ final class Mapper {
                 .id(equipmentModel.id())
                 .helmet(equipmentModel.helmet())
                 .armor(equipmentModel.armor())
-                .boots(equipmentModel.boots())
+                .shoes(equipmentModel.boots())
                 .pants(equipmentModel.pants())
                 .weapon(equipmentModel.weapon())
                 .shield(equipmentModel.shield())
@@ -62,7 +61,6 @@ final class Mapper {
         return BackpackItem.Builder.aBackpackItem()
                 .id(backpackItemModel.id())
                 .itemId(backpackItemModel.itemId())
-                .amount(backpackItemModel.amount())
                 .build();
     }
 }
