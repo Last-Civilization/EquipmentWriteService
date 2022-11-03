@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("classpath:backpack.yml")
 @ConfigurationPropertiesScan("com.lastcivilization.equipmentwriteservice.infrastructure.backpack")
 class BeanConfiguration {
 
