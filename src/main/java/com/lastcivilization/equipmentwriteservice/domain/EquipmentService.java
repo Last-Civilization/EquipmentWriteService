@@ -2,8 +2,10 @@ package com.lastcivilization.equipmentwriteservice.domain;
 
 import com.lastcivilization.equipmentwriteservice.domain.exception.BackpackIsFullException;
 import com.lastcivilization.equipmentwriteservice.domain.exception.EquipmentNotFoundException;
+import com.lastcivilization.equipmentwriteservice.domain.exception.ItemNotFoundException;
 import com.lastcivilization.equipmentwriteservice.domain.exception.ItemNotInBackpackException;
 import com.lastcivilization.equipmentwriteservice.domain.exception.ItemTypeNotMatchException;
+import com.lastcivilization.equipmentwriteservice.domain.exception.UserNotFoundException;
 import com.lastcivilization.equipmentwriteservice.domain.port.EquipmentRepository;
 import com.lastcivilization.equipmentwriteservice.domain.port.ItemService;
 import com.lastcivilization.equipmentwriteservice.domain.port.UserService;
@@ -14,6 +16,7 @@ import com.lastcivilization.equipmentwriteservice.domain.view.EquipmentModel;
 import com.lastcivilization.equipmentwriteservice.infrastructure.backpack.BackpackConfig;
 
 import java.util.List;
+import java.util.Optional;
 
 public class EquipmentService{
 
@@ -41,7 +44,7 @@ public class EquipmentService{
 
     public EquipmentModel setHelmet(String keycloakId, Long id){
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
-        ItemDto itemDto = itemService.getItem(id);
+        ItemDto itemDto = getItem(id);
         if(isNotHelmet(itemDto)){
             throw new ItemTypeNotMatchException(ItemType.HELMET);
         }
@@ -62,19 +65,20 @@ public class EquipmentService{
         return !itemDto.type().equals(ItemType.HELMET);
     }
 
-    private void removeItemFromBackpack(Equipment equipment, long id) {
+    private void removeItemFromBackpack(Equipment equipment, long itemId) {
         List<BackpackItem> backpack = equipment.getBackpack();
         for (BackpackItem backpackItem : backpack){
-            if(backpackItem.getItemId() == id){
+            if(backpackItem.getItemId() == itemId){
                 backpack.remove(backpackItem);
                 return;
             }
         }
-        throw new ItemNotInBackpackException(id);
+        throw new ItemNotInBackpackException(itemId);
     }
 
     private Equipment getEquipmentByKeycloakId(String keycloakId){
-        UserDto userDto = userService.getUser(keycloakId);
+        UserDto userDto = userService.getUser(keycloakId)
+                .orElseThrow(() -> new UserNotFoundException(keycloakId));
         EquipmentModel equipmentModel = getEquipmentModel(userDto.equipment());
         return Mapper.toDomain(equipmentModel);
     }
@@ -86,7 +90,7 @@ public class EquipmentService{
 
     public EquipmentModel setArmor(String keycloakId, Long id){
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
-        ItemDto itemDto = itemService.getItem(id);
+        ItemDto itemDto = getItem(id);
         if(isNotArmor(itemDto)){
             throw new ItemTypeNotMatchException(ItemType.ARMOR);
         }
@@ -99,6 +103,11 @@ public class EquipmentService{
         return equipmentRepository.save(equipmentModel);
     }
 
+    private ItemDto getItem(Long id) {
+        return itemService.getItem(id)
+                .orElseThrow(() -> new ItemNotFoundException(id));
+    }
+
     private boolean haveArmorBefore(Equipment equipment) {
         return equipment.getArmor() != null;
     }
@@ -109,7 +118,7 @@ public class EquipmentService{
 
     public EquipmentModel setShoes(String keycloakId, long id){
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
-        ItemDto itemDto = itemService.getItem(id);
+        ItemDto itemDto = getItem(id);
         if(isNotShoes(itemDto)){
             throw new ItemTypeNotMatchException(ItemType.SHOES);
         }
@@ -132,7 +141,7 @@ public class EquipmentService{
 
     public EquipmentModel setPants(String keycloakId, long id){
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
-        ItemDto itemDto = itemService.getItem(id);
+        ItemDto itemDto = getItem(id);
         if(isNotPants(itemDto)){
             throw new ItemTypeNotMatchException(ItemType.PANTS);
         }
@@ -155,7 +164,7 @@ public class EquipmentService{
 
     public EquipmentModel setWeapon(String keycloakId, long id){
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
-        ItemDto itemDto = itemService.getItem(id);
+        ItemDto itemDto = getItem(id);
         if(isNotWeapon(itemDto)){
             throw new ItemTypeNotMatchException(ItemType.WEAPON);
         }
@@ -178,7 +187,7 @@ public class EquipmentService{
 
     public EquipmentModel setShield(String keycloakId, long id){
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
-        ItemDto itemDto = itemService.getItem(id);
+        ItemDto itemDto = getItem(id);
         if(isNotShield(itemDto)){
             throw new ItemTypeNotMatchException(ItemType.SHIELD);
         }
@@ -200,11 +209,17 @@ public class EquipmentService{
     }
 
     public EquipmentModel addItemToBackpack(String keycloakId, long id){
+        if(isNotItem(id)){
+            throw new ItemNotFoundException(id);
+        }
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
-        List<BackpackItem> backpack = equipment.getBackpack();
-        addItemToBackpack(id, backpack);
+        addItemToBackpack(id, equipment.getBackpack());
         EquipmentModel equipmentModel = Mapper.toModel(equipment);
         return equipmentRepository.save(equipmentModel);
+    }
+
+    private boolean isNotItem(long id) {
+        return !itemService.isItem(id);
     }
 
     private void addItemToBackpack(long id, List<BackpackItem> backpack) {
@@ -222,5 +237,15 @@ public class EquipmentService{
 
     private boolean isBackpackFull(List<BackpackItem> backpack) {
         return backpack.size() == backpackConfig.getSize();
+    }
+
+    public EquipmentModel removeItemFromBackpack(String keycloakId, long id){
+        if (isNotItem(id)){
+            throw new ItemNotFoundException(id);
+        }
+        Equipment equipment = getEquipmentByKeycloakId(keycloakId);
+        removeItemFromBackpack(equipment, id);
+        EquipmentModel equipmentModel = Mapper.toModel(equipment);
+        return equipmentRepository.save(equipmentModel);
     }
 }
