@@ -1,5 +1,7 @@
 package com.lastcivilization.equipmentwriteservice.domain;
 
+import javax.persistence.Column;
+import javax.persistence.FetchType;
 import java.util.ArrayList;
 import java.util.List;
 
