@@ -3,9 +3,9 @@ package com.lastcivilization.equipmentwriteservice.domain;
 class BackpackItem {
 
     private Long id;
-    private Long itemId;
+    private long itemId;
 
-    public BackpackItem(Long id, Long itemId) {
+    public BackpackItem(Long id, long itemId) {
         this.id = id;
         this.itemId = itemId;
     }
@@ -18,18 +18,18 @@ class BackpackItem {
         this.id = id;
     }
 
-    public Long getItemId() {
+    public long getItemId() {
         return itemId;
     }
 
-    public void setItemId(Long itemId) {
+    public void setItemId(long itemId) {
         this.itemId = itemId;
     }
 
     public static final class Builder {
 
         private Long id;
-        private Long itemId;
+        private long itemId;
 
         private Builder() {
         }
@@ -43,7 +43,7 @@ class BackpackItem {
             return this;
         }
 
-        public Builder itemId(Long itemId) {
+        public Builder itemId(long itemId) {
             this.itemId = itemId;
             return this;
         }

@@ -116,7 +116,7 @@ public class EquipmentService{
         return !itemDto.type().equals(ItemType.ARMOR);
     }
 
-    public EquipmentModel setShoes(String keycloakId, long id){
+    public EquipmentModel setShoes(String keycloakId, Long id){
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
         ItemDto itemDto = getItem(id);
         if(isNotShoes(itemDto)){
@@ -139,7 +139,7 @@ public class EquipmentService{
         return !itemDto.type().equals(ItemType.SHOES);
     }
 
-    public EquipmentModel setPants(String keycloakId, long id){
+    public EquipmentModel setPants(String keycloakId, Long id){
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
         ItemDto itemDto = getItem(id);
         if(isNotPants(itemDto)){
@@ -162,7 +162,7 @@ public class EquipmentService{
         return !itemDto.type().equals(ItemType.PANTS);
     }
 
-    public EquipmentModel setWeapon(String keycloakId, long id){
+    public EquipmentModel setWeapon(String keycloakId, Long id){
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
         ItemDto itemDto = getItem(id);
         if(isNotWeapon(itemDto)){
@@ -185,7 +185,7 @@ public class EquipmentService{
         return !itemDto.type().equals(ItemType.WEAPON);
     }
 
-    public EquipmentModel setShield(String keycloakId, long id){
+    public EquipmentModel setShield(String keycloakId, Long id){
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
         ItemDto itemDto = getItem(id);
         if(isNotShield(itemDto)){
