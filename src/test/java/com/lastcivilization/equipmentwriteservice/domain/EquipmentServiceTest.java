@@ -1,6 +1,7 @@
 package com.lastcivilization.equipmentwriteservice.domain;
 
 import com.lastcivilization.equipmentwriteservice.domain.exception.ItemNotFoundException;
+import com.lastcivilization.equipmentwriteservice.domain.exception.ItemNotInBackpackException;
 import com.lastcivilization.equipmentwriteservice.domain.exception.ItemTypeNotMatchException;
 import com.lastcivilization.equipmentwriteservice.domain.exception.UserNotFoundException;
 import com.lastcivilization.equipmentwriteservice.domain.port.EquipmentRepository;
@@ -19,6 +20,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -133,10 +135,108 @@ class EquipmentServiceTest {
     }
 
     @Test
-    void setArmor() {
+    void shouldThrowItemNotInBackpackWhileSettingHelmet() {
         //given
+        when(userService.getUser(anyString())).thenReturn(Optional.of(userDto));
+        when(equipmentRepository.findById(anyLong())).thenReturn(
+                Optional.of(
+                        new EquipmentModel(1L, 1L, null, null, null, null, null,
+                                new ArrayList<>())));
+        when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.HELMET)));
         //when
+        Executable setExecutable = () -> underTest.setHelmet(anyString(), 1L);
         //then
+        assertThrows(ItemNotInBackpackException.class, setExecutable);
+    }
+
+    @Test
+    void shouldSetArmorWithoutArmorBefore() {
+        //given
+        when(userService.getUser(anyString())).thenReturn(Optional.of(userDto));
+        when(equipmentRepository.findById(anyLong())).thenReturn(
+                Optional.of(
+                        new EquipmentModel(1L, null, null, null, null, null, null,
+                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+        when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.ARMOR)));
+        doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
+        //when
+        EquipmentModel equipmentModel = underTest.setArmor(anyString(), 1L);
+        //then
+        assertThat(equipmentModel.armor()).isEqualTo(1L);
+        assertThat(equipmentModel.backpack().size()).isEqualTo(0);
+    }
+
+    @Test
+    void shouldSetArmorWithArmorBefore() {
+        //given
+        when(userService.getUser(anyString())).thenReturn(Optional.of(userDto));
+        when(equipmentRepository.findById(anyLong())).thenReturn(
+                Optional.of(
+                        new EquipmentModel(1L, null, 1L, null, null, null, null,
+                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+        when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.ARMOR)));
+        doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
+        when(backpackConfig.getSize()).thenReturn(1);
+        //when
+        EquipmentModel equipmentModel = underTest.setArmor(anyString(), 1L);
+        //then
+        assertThat(equipmentModel.armor()).isEqualTo(1L);
+        assertThat(equipmentModel.backpack().size()).isEqualTo(1);
+    }
+
+    @Test
+    void shouldThrowItemTypeNotMatchWhileSettingArmor() {
+        //given
+        when(userService.getUser(anyString())).thenReturn(Optional.of(userDto));
+        when(equipmentRepository.findById(anyLong())).thenReturn(
+                Optional.of(
+                        new EquipmentModel(1L, null, 1L, null, null, null, null,
+                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+        when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.USE)));
+        //when
+        Executable setExecutable = () -> underTest.setArmor(anyString(), 1L);
+        //then
+        assertThrows(ItemTypeNotMatchException.class, setExecutable);
+    }
+
+    @Test
+    void shouldThrowItemNotFoundWhileSettingArmor() {
+        //given
+        when(userService.getUser(anyString())).thenReturn(Optional.of(userDto));
+        when(equipmentRepository.findById(anyLong())).thenReturn(
+                Optional.of(
+                        new EquipmentModel(1L, null, 1L, null, null, null, null,
+                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+        when(itemService.getItem(anyLong())).thenReturn(Optional.empty());
+        //when
+        Executable setExecutable = () -> underTest.setArmor(anyString(), 1L);
+        //then
+        assertThrows(ItemNotFoundException.class, setExecutable);
+    }
+
+    @Test
+    void shouldThrowUserNotFoundWhileSettingArmor() {
+        //given
+        when(userService.getUser(anyString())).thenReturn(Optional.empty());
+        //when
+        Executable setExecutable = () -> underTest.setArmor(anyString(), 1L);
+        //then
+        assertThrows(UserNotFoundException.class, setExecutable);
+    }
+
+    @Test
+    void shouldThrowItemNotInBackpackWhileSettingArmor() {
+        //given
+        when(userService.getUser(anyString())).thenReturn(Optional.of(userDto));
+        when(equipmentRepository.findById(anyLong())).thenReturn(
+                Optional.of(
+                        new EquipmentModel(1L, 1L, null, null, null, null, null,
+                                new ArrayList<>())));
+        when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.ARMOR)));
+        //when
+        Executable setExecutable = () -> underTest.setArmor(anyString(), 1L);
+        //then
+        assertThrows(ItemNotInBackpackException.class, setExecutable);
     }
 
     @Test
