@@ -43,7 +43,7 @@ final class Mapper {
                 .id(equipmentModel.id())
                 .helmet(equipmentModel.helmet())
                 .armor(equipmentModel.armor())
-                .shoes(equipmentModel.boots())
+                .shoes(equipmentModel.shoes())
                 .pants(equipmentModel.pants())
                 .weapon(equipmentModel.weapon())
                 .shield(equipmentModel.shield())

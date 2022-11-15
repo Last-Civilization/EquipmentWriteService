@@ -6,7 +6,7 @@ public record EquipmentModel(
         Long id,
         Long helmet,
         Long armor,
-        Long boots,
+        Long shoes,
         Long pants,
         Long weapon,
         Long shield,
