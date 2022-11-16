@@ -32,7 +32,7 @@ class EquipmentControllerTest extends IntegrationBaseClass {
     void shouldSetHelmet() throws Exception {
         //given
         //when
-        ResultActions setResult = mockMvc.perform(put("/equipments/helmet/helmets/1"));
+        ResultActions setResult = mockMvc.perform(put("/equipments/test/helmets/1"));
         //then
         setResult.andExpect(status().isOk())
                 .andExpect(jsonPath("$.helmet").value(1L));

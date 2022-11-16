@@ -15,12 +15,21 @@ class WireMockConfiguration {
     @Bean
     public WireMockServer wireMockServer(){
         WireMockServer wireMockServer = new WireMockServer(9561);
+        mockUsers(wireMockServer);
         mockItems(wireMockServer);
         return wireMockServer;
     }
 
     private void mockItems(WireMockServer wireMockServer) {
-        wireMockServer.stubFor(get(WireMock.urlEqualTo("/users/helmet"))
+        wireMockServer.stubFor(get(WireMock.urlEqualTo("/items/1"))
+                .willReturn(aResponse()
+                        .withStatus(OK.value())
+                        .withHeader("Content-Type", APPLICATION_JSON_VALUE)
+                        .withBody("{ \"type\":HELMET}")));
+    }
+
+    private void mockUsers(WireMockServer wireMockServer) {
+        wireMockServer.stubFor(get(WireMock.urlEqualTo("/users/test"))
                 .willReturn(aResponse()
                         .withStatus(OK.value())
                         .withHeader("Content-Type", APPLICATION_JSON_VALUE)
