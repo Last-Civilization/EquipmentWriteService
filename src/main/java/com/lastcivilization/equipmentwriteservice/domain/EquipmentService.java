@@ -195,7 +195,7 @@ public class EquipmentService{
         if(haveShieldBefore(equipment)){
             addItemToBackpack(equipment.getShield(), equipment.getBackpack());
         }
-        equipment.setHelmet(id);
+        equipment.setShield(id);
         EquipmentModel equipmentModel = Mapper.toModel(equipment);
         return equipmentRepository.save(equipmentModel);
     }

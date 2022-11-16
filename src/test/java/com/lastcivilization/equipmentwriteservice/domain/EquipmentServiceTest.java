@@ -699,7 +699,7 @@ class EquipmentServiceTest {
     @Test
     void shouldThrowUserNotFoundExceptionWhileAddingItemToBackpack() {
         //given
-        when(itemService.isItem(anyLong())).thenReturn(false);
+        when(itemService.isItem(anyLong())).thenReturn(true);
         when(userService.getUser(anyString())).thenReturn(Optional.empty());
         //when
         Executable addExecutable = () -> underTest.addItemToBackpack(anyString(), 1L);
@@ -710,7 +710,7 @@ class EquipmentServiceTest {
     @Test
     void shouldThrowEquipmentNotFoundExceptionWhileAddingItemToBackpack() {
         //given
-        when(itemService.isItem(anyLong())).thenReturn(false);
+        when(itemService.isItem(anyLong())).thenReturn(true);
         when(userService.getUser(anyString())).thenReturn(Optional.of(userDto));
         when(equipmentRepository.findById(anyLong())).thenReturn(Optional.empty());
         //when
@@ -736,9 +736,69 @@ class EquipmentServiceTest {
     }
 
     @Test
-    void removeItemFromBackpack() {
+    void shouldRemoveItemFromBackpack() {
         //given
+        when(itemService.isItem(anyLong())).thenReturn(true);
+        when(userService.getUser(anyString())).thenReturn(Optional.of(userDto));
+        when(equipmentRepository.findById(anyLong())).thenReturn(
+                Optional.of(
+                        new EquipmentModel(1L, null, null, null, null, null, null,
+                                List.of(new BackpackItemModel[]{new BackpackItemModel(
+                                        1L,
+                                        1L
+                                )}))));
+        doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
         //when
+        EquipmentModel equipmentModel = underTest.removeItemFromBackpack(anyString(), 1L);
         //then
+        assertThat(equipmentModel.backpack().size()).isEqualTo(0);
+    }
+
+    @Test
+    void shouldThrowItemNotFoundExceptionWhileRemovingItemFromBackpack() {
+        //given
+        when(itemService.isItem(anyLong())).thenReturn(false);
+        //when
+        Executable removeExecutable = () -> underTest.removeItemFromBackpack(anyString(), 1L);
+        //then
+        assertThrows(ItemNotFoundException.class, removeExecutable);
+    }
+
+    @Test
+    void shouldThrowUserNotFoundExceptionWhileRemovingItemFromBackpack() {
+        //given
+        when(itemService.isItem(anyLong())).thenReturn(true);
+        when(userService.getUser(anyString())).thenReturn(Optional.empty());
+        //when
+        Executable removeExecutable = () -> underTest.removeItemFromBackpack(anyString(), 1L);
+        //then
+        assertThrows(UserNotFoundException.class, removeExecutable);
+    }
+
+    @Test
+    void shouldThrowEquipmentNotFoundExceptionWhileRemovingItemFromBackpack() {
+        //given
+        when(itemService.isItem(anyLong())).thenReturn(true);
+        when(userService.getUser(anyString())).thenReturn(Optional.of(userDto));
+        when(equipmentRepository.findById(anyLong())).thenReturn(Optional.empty());
+        //when
+        Executable removeExecutable = () -> underTest.removeItemFromBackpack(anyString(), 1L);
+        //then
+        assertThrows(EquipmentNotFoundException.class, removeExecutable);
+    }
+
+    @Test
+    void shouldThrowItemNotInBackpackExceptionWhileRemovingItemFromBackpack() {
+        //given
+        when(itemService.isItem(anyLong())).thenReturn(true);
+        when(userService.getUser(anyString())).thenReturn(Optional.of(userDto));
+        when(equipmentRepository.findById(anyLong())).thenReturn(
+                Optional.of(
+                        new EquipmentModel(1L, null, null, null, null, null, null,
+                                new ArrayList<>())));
+        //when
+        Executable removeExecutable = () -> underTest.removeItemFromBackpack(anyString(), 1L);
+        //then
+        assertThrows(ItemNotInBackpackException.class, removeExecutable);
     }
 }
