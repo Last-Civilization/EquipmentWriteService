@@ -12,7 +12,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @TestConfiguration
 class WireMockConfiguration {
 
-    @Bean
+    @Bean(initMethod = "start", destroyMethod = "stop")
     public WireMockServer wireMockServer(){
         WireMockServer wireMockServer = new WireMockServer(9561);
         mockUsers(wireMockServer);
@@ -25,7 +25,7 @@ class WireMockConfiguration {
                 .willReturn(aResponse()
                         .withStatus(OK.value())
                         .withHeader("Content-Type", APPLICATION_JSON_VALUE)
-                        .withBody("{ \"type\":HELMET}")));
+                        .withBody("{ \"type\":\"HELMET\" }")));
     }
 
     private void mockUsers(WireMockServer wireMockServer) {
@@ -33,6 +33,6 @@ class WireMockConfiguration {
                 .willReturn(aResponse()
                         .withStatus(OK.value())
                         .withHeader("Content-Type", APPLICATION_JSON_VALUE)
-                        .withBody("{ \"equipment\":1}")));
+                        .withBody("{ \"equipment\": 1 }")));
     }
 }

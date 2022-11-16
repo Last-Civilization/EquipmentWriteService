@@ -15,7 +15,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-@SpringBootTest(classes = {EquipmentWriteServiceApplication.class, EquipmentCreator.class}, webEnvironment = RANDOM_PORT, properties = "test.url=http://localhost:9561")
+@SpringBootTest(classes = {EquipmentWriteServiceApplication.class, EquipmentCreator.class, WireMockConfiguration.class}, webEnvironment = RANDOM_PORT, properties = "test.url=http" +
+        "://localhost:9561")
 @Testcontainers
 @AutoConfigureMockMvc
 public class IntegrationBaseClass {

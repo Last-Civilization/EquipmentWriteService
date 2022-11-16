@@ -28,5 +28,6 @@ public class BackpackItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "item_id")
     private Long itemId;
 }
