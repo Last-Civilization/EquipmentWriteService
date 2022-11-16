@@ -6,8 +6,6 @@ import com.lastcivilization.equipmentwriteservice.domain.view.EquipmentModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -19,12 +17,12 @@ class EquipmentCreator {
     EquipmentModel createEquipment(){
         EquipmentModel equipmentModel = new EquipmentModel(
                 1L,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                1L,
+                1L,
+                1L,
+                1L,
+                1L,
+                1L,
                 List.of(new BackpackItemModel(
                         null,
                         1L
