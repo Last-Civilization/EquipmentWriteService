@@ -25,7 +25,7 @@ public class EquipmentService{
     private final ItemService itemService;
     private final BackpackConfig backpackConfig;
 
-    EquipmentService(EquipmentRepository equipmentRepository, UserService userService, ItemService itemService, BackpackConfig backpackConfig) {
+    public EquipmentService(EquipmentRepository equipmentRepository, UserService userService, ItemService itemService, BackpackConfig backpackConfig) {
         this.equipmentRepository = equipmentRepository;
         this.userService = userService;
         this.itemService = itemService;

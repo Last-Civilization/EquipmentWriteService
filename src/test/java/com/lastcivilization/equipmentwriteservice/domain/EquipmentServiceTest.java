@@ -69,7 +69,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.HELMET)));
         doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
         //when
@@ -86,7 +86,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, 1L, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.HELMET)));
         doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
         when(backpackConfig.getSize()).thenReturn(1);
@@ -104,7 +104,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.USE)));
         //when
         Executable setExecutable = () -> underTest.setHelmet(anyString(), 1L);
@@ -119,7 +119,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.empty());
         //when
         Executable setExecutable = () -> underTest.setHelmet(anyString(), 1L);
@@ -170,7 +170,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.ARMOR)));
         doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
         //when
@@ -187,7 +187,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, 1L, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.ARMOR)));
         doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
         when(backpackConfig.getSize()).thenReturn(1);
@@ -205,7 +205,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.USE)));
         //when
         Executable setExecutable = () -> underTest.setArmor(anyString(), 1L);
@@ -220,7 +220,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.empty());
         //when
         Executable setExecutable = () -> underTest.setArmor(anyString(), 1L);
@@ -271,7 +271,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.SHOES)));
         doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
         //when
@@ -288,7 +288,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, 1L, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.SHOES)));
         doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
         when(backpackConfig.getSize()).thenReturn(1);
@@ -306,7 +306,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.USE)));
         //when
         Executable setExecutable = () -> underTest.setShoes(anyString(), 1L);
@@ -321,7 +321,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.empty());
         //when
         Executable setExecutable = () -> underTest.setShoes(anyString(), 1L);
@@ -372,7 +372,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.PANTS)));
         doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
         //when
@@ -389,7 +389,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, 1L, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.PANTS)));
         doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
         when(backpackConfig.getSize()).thenReturn(1);
@@ -407,7 +407,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.USE)));
         //when
         Executable setExecutable = () -> underTest.setPants(anyString(), 1L);
@@ -422,7 +422,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.empty());
         //when
         Executable setExecutable = () -> underTest.setPants(anyString(), 1L);
@@ -473,7 +473,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.WEAPON)));
         doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
         //when
@@ -490,7 +490,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, 1L, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.WEAPON)));
         doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
         when(backpackConfig.getSize()).thenReturn(1);
@@ -508,7 +508,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.USE)));
         //when
         Executable setExecutable = () -> underTest.setWeapon(anyString(), 1L);
@@ -523,7 +523,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.empty());
         //when
         Executable setExecutable = () -> underTest.setWeapon(anyString(), 1L);
@@ -574,7 +574,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.SHIELD)));
         doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
         //when
@@ -591,7 +591,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, 1L,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.SHIELD)));
         doAnswer(invocation -> invocation.getArgument(0)).when(equipmentRepository).save(any(EquipmentModel.class));
         when(backpackConfig.getSize()).thenReturn(1);
@@ -609,7 +609,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.of(new ItemDto(ItemType.USE)));
         //when
         Executable setExecutable = () -> underTest.setShield(anyString(), 1L);
@@ -624,7 +624,7 @@ class EquipmentServiceTest {
         when(equipmentRepository.findById(anyLong())).thenReturn(
                 Optional.of(
                         new EquipmentModel(1L, null, null, null, null, null, null,
-                                List.of(new BackpackItemModel[]{ new BackpackItemModel(1L, 1L)}))));
+                                List.of(new BackpackItemModel(1L, 1L)))));
         when(itemService.getItem(anyLong())).thenReturn(Optional.empty());
         //when
         Executable setExecutable = () -> underTest.setShield(anyString(), 1L);

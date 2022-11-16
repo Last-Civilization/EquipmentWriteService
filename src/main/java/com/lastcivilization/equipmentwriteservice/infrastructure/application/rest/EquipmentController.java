@@ -5,17 +5,22 @@ import com.lastcivilization.equipmentwriteservice.domain.view.EquipmentModel;
 import com.lastcivilization.equipmentwriteservice.infrastructure.application.rest.dto.EquipmentDto;
 import liquibase.pro.packaged.M;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.Min;
 
 import static com.lastcivilization.equipmentwriteservice.infrastructure.application.rest.RestMapper.MAPPER;
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +31,7 @@ class EquipmentController {
     private final EquipmentService equipmentService;
 
     @PostMapping
+    @ResponseStatus(CREATED)
     EquipmentDto createEquipment(){
         EquipmentModel equipmentModel = equipmentService.createEquipment();
         return MAPPER.toDto(equipmentModel);
@@ -113,5 +119,11 @@ class EquipmentController {
     EquipmentDto removeItemFromBackpack(@PathVariable String keycloakId, @PathVariable @Min(1) long id){
         EquipmentModel equipmentModel = equipmentService.removeItemFromBackpack(keycloakId, id);
         return MAPPER.toDto(equipmentModel);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(NO_CONTENT)
+    void deleteEquipment(@PathVariable @Min(1) long id){
+        equipmentService.deleteEquipment(id);
     }
 }
