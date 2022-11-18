@@ -39,93 +39,77 @@ class EquipmentControllerTest extends IntegrationBaseClass {
     }
 
     @Test
-    void removeHelmet() {
+    void setArmor() throws Exception {
         //given
         //when
+        ResultActions setResult = mockMvc.perform(put("/equipments/test/armors/2"));
         //then
+        setResult.andExpect(status().isOk())
+                .andExpect(jsonPath("$.armor").value(2L));
     }
 
     @Test
-    void setArmor() {
+    void setShoes() throws Exception {
         //given
         //when
+        ResultActions setResult = mockMvc.perform(put("/equipments/test/shoes/3"));
         //then
+        setResult.andExpect(status().isOk())
+                .andExpect(jsonPath("$.shoes").value(3L));
     }
 
     @Test
-    void removeArmor() {
+    void setPants() throws Exception {
         //given
         //when
+        ResultActions setResult = mockMvc.perform(put("/equipments/test/pants/4"));
         //then
+        setResult.andExpect(status().isOk())
+                .andExpect(jsonPath("$.pants").value(4L));
     }
 
     @Test
-    void setShoes() {
+    void setWeapon() throws Exception {
         //given
         //when
+        ResultActions setResult = mockMvc.perform(put("/equipments/test/weapons/5"));
         //then
+        setResult.andExpect(status().isOk())
+                .andExpect(jsonPath("$.weapon").value(5L));
     }
 
     @Test
-    void removeShoes() {
+    void setShield() throws Exception {
         //given
         //when
+        ResultActions setResult = mockMvc.perform(put("/equipments/test/shields/6"));
         //then
+        setResult.andExpect(status().isOk())
+                .andExpect(jsonPath("$.shield").value(6L));
     }
 
     @Test
-    void setPants() {
+    void addItemToBackpack() throws Exception {
         //given
         //when
+        ResultActions addResult = mockMvc.perform(put("/equipments/test/backpacks/2"));
         //then
+        addResult.andExpect(status().isOk())
+                .andExpect(jsonPath("$.backpack.[1].itemId").value(2L));
     }
 
     @Test
-    void removePants() {
+    void removeItemFromBackpack() throws Exception {
         //given
         //when
+        ResultActions addResult = mockMvc.perform(put("/equipments/test/backpacks/1/remove"));
         //then
-    }
-
-    @Test
-    void setWeapon() {
-        //given
-        //when
-        //then
-    }
-
-    @Test
-    void removeWeapom() {
-        //given
-        //when
-        //then
-    }
-
-    @Test
-    void setShield() {
-        //given
-        //when
-        //then
-    }
-
-    @Test
-    void removeShield() {
-        //given
-        //when
-        //then
-    }
-
-    @Test
-    void addItemToBackpack() {
-        //given
-        //when
-        //then
-    }
-
-    @Test
-    void removeItemFromBackpack() {
-        //given
-        //when
-        //then
+        addResult.andExpect(status().isOk())
+                .andExpect(jsonPath("$.backpack.[0].itemId").exists())
+                .andExpect(jsonPath("$.backpack.[1].itemId").exists())
+                .andExpect(jsonPath("$.backpack.[2].itemId").exists())
+                .andExpect(jsonPath("$.backpack.[3].itemId").exists())
+                .andExpect(jsonPath("$.backpack.[4].itemId").exists())
+                .andExpect(jsonPath("$.backpack.[5].itemId").doesNotExist());
     }
 }

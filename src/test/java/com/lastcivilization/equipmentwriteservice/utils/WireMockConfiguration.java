@@ -26,6 +26,41 @@ class WireMockConfiguration {
                         .withStatus(OK.value())
                         .withHeader("Content-Type", APPLICATION_JSON_VALUE)
                         .withBody("{ \"type\":\"HELMET\" }")));
+        wireMockServer.stubFor(get(WireMock.urlEqualTo("/items/2"))
+                .willReturn(aResponse()
+                        .withStatus(OK.value())
+                        .withHeader("Content-Type", APPLICATION_JSON_VALUE)
+                        .withBody("{ \"type\":\"ARMOR\" }")));
+        wireMockServer.stubFor(get(WireMock.urlEqualTo("/items/3"))
+                .willReturn(aResponse()
+                        .withStatus(OK.value())
+                        .withHeader("Content-Type", APPLICATION_JSON_VALUE)
+                        .withBody("{ \"type\":\"SHOES\" }")));
+        wireMockServer.stubFor(get(WireMock.urlEqualTo("/items/4"))
+                .willReturn(aResponse()
+                        .withStatus(OK.value())
+                        .withHeader("Content-Type", APPLICATION_JSON_VALUE)
+                        .withBody("{ \"type\":\"PANTS\" }")));
+        wireMockServer.stubFor(get(WireMock.urlEqualTo("/items/5"))
+                .willReturn(aResponse()
+                        .withStatus(OK.value())
+                        .withHeader("Content-Type", APPLICATION_JSON_VALUE)
+                        .withBody("{ \"type\":\"WEAPON\" }")));
+        wireMockServer.stubFor(get(WireMock.urlEqualTo("/items/6"))
+                .willReturn(aResponse()
+                        .withStatus(OK.value())
+                        .withHeader("Content-Type", APPLICATION_JSON_VALUE)
+                        .withBody("{ \"type\":\"SHIELD\" }")));
+        wireMockServer.stubFor(get(WireMock.urlEqualTo("/items/1/exists"))
+                .willReturn(aResponse()
+                        .withStatus(OK.value())
+                        .withHeader("Content-Type", APPLICATION_JSON_VALUE)
+                        .withBody("true")));
+        wireMockServer.stubFor(get(WireMock.urlEqualTo("/items/2/exists"))
+                .willReturn(aResponse()
+                        .withStatus(OK.value())
+                        .withHeader("Content-Type", APPLICATION_JSON_VALUE)
+                        .withBody("true")));
     }
 
     private void mockUsers(WireMockServer wireMockServer) {

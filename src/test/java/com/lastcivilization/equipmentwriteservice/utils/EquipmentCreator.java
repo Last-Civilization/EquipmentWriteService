@@ -26,7 +26,27 @@ class EquipmentCreator {
                 List.of(new BackpackItemModel(
                         null,
                         1L
-                ))
+                        ),
+                        new BackpackItemModel(
+                                null,
+                                2L
+                        ),
+                        new BackpackItemModel(
+                                null,
+                                3L
+                        ),
+                        new BackpackItemModel(
+                                null,
+                                4L
+                        ),
+                        new BackpackItemModel(
+                                null,
+                                5L
+                        ),
+                        new BackpackItemModel(
+                                null,
+                                6L
+                        ))
         );
         return equipmentRepository.save(equipmentModel);
     }

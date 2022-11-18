@@ -14,6 +14,7 @@ import com.lastcivilization.equipmentwriteservice.domain.port.dto.ItemType;
 import com.lastcivilization.equipmentwriteservice.domain.port.dto.UserDto;
 import com.lastcivilization.equipmentwriteservice.domain.view.EquipmentModel;
 import com.lastcivilization.equipmentwriteservice.infrastructure.backpack.BackpackConfig;
+import liquibase.pro.packaged.S;
 
 import java.util.List;
 import java.util.Optional;

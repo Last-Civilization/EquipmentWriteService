@@ -3,12 +3,9 @@ package com.lastcivilization.equipmentwriteservice.infrastructure.application.re
 import com.lastcivilization.equipmentwriteservice.domain.EquipmentService;
 import com.lastcivilization.equipmentwriteservice.domain.view.EquipmentModel;
 import com.lastcivilization.equipmentwriteservice.infrastructure.application.rest.dto.EquipmentDto;
-import liquibase.pro.packaged.M;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -43,21 +40,9 @@ class EquipmentController {
         return MAPPER.toDto(equipmentModel);
     }
 
-    @PutMapping("/{keycloakId}/helmets")
-    EquipmentDto removeHelmet(@PathVariable String keycloakId){
-        EquipmentModel equipmentModel = equipmentService.setHelmet(keycloakId, null);
-        return MAPPER.toDto(equipmentModel);
-    }
-
     @PutMapping("/{keycloakId}/armors/{id}")
     EquipmentDto setArmor(@PathVariable String keycloakId, @PathVariable @Min(1) long id){
         EquipmentModel equipmentModel = equipmentService.setArmor(keycloakId, id);
-        return MAPPER.toDto(equipmentModel);
-    }
-
-    @PutMapping("/{keycloakId}/armors")
-    EquipmentDto removeArmor(@PathVariable String keycloakId){
-        EquipmentModel equipmentModel = equipmentService.setArmor(keycloakId, null);
         return MAPPER.toDto(equipmentModel);
     }
 
@@ -67,21 +52,9 @@ class EquipmentController {
         return MAPPER.toDto(equipmentModel);
     }
 
-    @PutMapping("/{keycloakId}/shoes")
-    EquipmentDto removeShoes(@PathVariable String keycloakId){
-        EquipmentModel equipmentModel = equipmentService.setShoes(keycloakId, null);
-        return MAPPER.toDto(equipmentModel);
-    }
-
     @PutMapping("/{keycloakId}/pants/{id}")
     EquipmentDto setPants(@PathVariable String keycloakId, @PathVariable @Min(1) long id){
         EquipmentModel equipmentModel = equipmentService.setPants(keycloakId, id);
-        return MAPPER.toDto(equipmentModel);
-    }
-
-    @PutMapping("/{keycloakId}/pants")
-    EquipmentDto removePants(@PathVariable String keycloakId){
-        EquipmentModel equipmentModel = equipmentService.setPants(keycloakId, null);
         return MAPPER.toDto(equipmentModel);
     }
 
@@ -91,21 +64,9 @@ class EquipmentController {
         return MAPPER.toDto(equipmentModel);
     }
 
-    @PutMapping("/{keycloakId}/weapons")
-    EquipmentDto removeWeapom(@PathVariable String keycloakId){
-        EquipmentModel equipmentModel = equipmentService.setWeapon(keycloakId, null);
-        return MAPPER.toDto(equipmentModel);
-    }
-
     @PutMapping("/{keycloakId}/shields/{id}")
     EquipmentDto setShield(@PathVariable String keycloakId, @PathVariable @Min(1) long id){
         EquipmentModel equipmentModel = equipmentService.setShield(keycloakId, id);
-        return MAPPER.toDto(equipmentModel);
-    }
-
-    @PutMapping("/{keycloakId}/shields")
-    EquipmentDto removeShield(@PathVariable String keycloakId){
-        EquipmentModel equipmentModel = equipmentService.setShield(keycloakId, null);
         return MAPPER.toDto(equipmentModel);
     }
 
