@@ -5,10 +5,8 @@ import com.lastcivilization.equipmentwriteservice.infrastructure.application.res
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 interface RestMapper {
-
-    RestMapper MAPPER = Mappers.getMapper(RestMapper.class);
 
     EquipmentDto toDto(EquipmentModel equipmentModel);
 }

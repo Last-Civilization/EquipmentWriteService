@@ -4,11 +4,8 @@ import com.lastcivilization.equipmentwriteservice.domain.view.EquipmentModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 interface EntityMapper {
-
-    EntityMapper MAPPER = Mappers.getMapper(EntityMapper.class);
-
     EquipmentModel toModel(EquipmentEntity equipmentEntity);
     EquipmentEntity toEntity(EquipmentModel equipmentModel);
 }

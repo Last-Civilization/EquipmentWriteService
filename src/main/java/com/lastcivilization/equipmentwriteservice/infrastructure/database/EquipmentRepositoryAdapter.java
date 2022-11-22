@@ -7,19 +7,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static com.lastcivilization.equipmentwriteservice.infrastructure.database.EntityMapper.MAPPER;
-
 @Service
 @RequiredArgsConstructor
 class EquipmentRepositoryAdapter implements EquipmentRepository {
 
     private final EquipmentJpaRepository equipmentJpaRepository;
+    private final EntityMapper entityMapper;
 
     @Override
     public EquipmentModel save(EquipmentModel equipmentModel) {
-        EquipmentEntity equipmentEntity = MAPPER.toEntity(equipmentModel);
+        EquipmentEntity equipmentEntity = entityMapper.toEntity(equipmentModel);
         EquipmentEntity savedEquipmentEntity = equipmentJpaRepository.save(equipmentEntity);
-        return MAPPER.toModel(savedEquipmentEntity);
+        return entityMapper.toModel(savedEquipmentEntity);
     }
 
     @Override
@@ -31,6 +30,6 @@ class EquipmentRepositoryAdapter implements EquipmentRepository {
     public Optional<EquipmentModel> findById(long id) {
         Optional<EquipmentEntity> equipmentEntityOptional = equipmentJpaRepository.findById(id);
         return equipmentEntityOptional
-                .map(MAPPER::toModel);
+                .map(entityMapper::toModel);
     }
 }
