@@ -14,6 +14,7 @@ import com.lastcivilization.equipmentwriteservice.domain.port.dto.ItemType;
 import com.lastcivilization.equipmentwriteservice.domain.port.dto.UserDto;
 import com.lastcivilization.equipmentwriteservice.domain.view.EquipmentModel;
 import com.lastcivilization.equipmentwriteservice.infrastructure.backpack.BackpackConfig;
+import liquibase.pro.packaged.S;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +26,7 @@ public class EquipmentService{
     private final ItemService itemService;
     private final BackpackConfig backpackConfig;
 
-    EquipmentService(EquipmentRepository equipmentRepository, UserService userService, ItemService itemService, BackpackConfig backpackConfig) {
+    public EquipmentService(EquipmentRepository equipmentRepository, UserService userService, ItemService itemService, BackpackConfig backpackConfig) {
         this.equipmentRepository = equipmentRepository;
         this.userService = userService;
         this.itemService = itemService;
@@ -116,7 +117,7 @@ public class EquipmentService{
         return !itemDto.type().equals(ItemType.ARMOR);
     }
 
-    public EquipmentModel setShoes(String keycloakId, long id){
+    public EquipmentModel setShoes(String keycloakId, Long id){
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
         ItemDto itemDto = getItem(id);
         if(isNotShoes(itemDto)){
@@ -139,7 +140,7 @@ public class EquipmentService{
         return !itemDto.type().equals(ItemType.SHOES);
     }
 
-    public EquipmentModel setPants(String keycloakId, long id){
+    public EquipmentModel setPants(String keycloakId, Long id){
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
         ItemDto itemDto = getItem(id);
         if(isNotPants(itemDto)){
@@ -162,7 +163,7 @@ public class EquipmentService{
         return !itemDto.type().equals(ItemType.PANTS);
     }
 
-    public EquipmentModel setWeapon(String keycloakId, long id){
+    public EquipmentModel setWeapon(String keycloakId, Long id){
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
         ItemDto itemDto = getItem(id);
         if(isNotWeapon(itemDto)){
@@ -185,7 +186,7 @@ public class EquipmentService{
         return !itemDto.type().equals(ItemType.WEAPON);
     }
 
-    public EquipmentModel setShield(String keycloakId, long id){
+    public EquipmentModel setShield(String keycloakId, Long id){
         Equipment equipment = getEquipmentByKeycloakId(keycloakId);
         ItemDto itemDto = getItem(id);
         if(isNotShield(itemDto)){
@@ -195,7 +196,7 @@ public class EquipmentService{
         if(haveShieldBefore(equipment)){
             addItemToBackpack(equipment.getShield(), equipment.getBackpack());
         }
-        equipment.setHelmet(id);
+        equipment.setShield(id);
         EquipmentModel equipmentModel = Mapper.toModel(equipment);
         return equipmentRepository.save(equipmentModel);
     }

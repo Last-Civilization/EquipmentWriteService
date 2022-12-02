@@ -1,8 +1,8 @@
-package com.lastcivilization.equipmentwriteservice.domain.view;
+package com.lastcivilization.equipmentwriteservice.infrastructure.application.rest.dto;
 
 import java.util.List;
 
-public record EquipmentModel(
+public record EquipmentDto(
         Long id,
         Long helmet,
         Long armor,
@@ -10,7 +10,5 @@ public record EquipmentModel(
         Long pants,
         Long weapon,
         Long shield,
-        List<BackpackItemModel> backpack
-) {
-
-}
+        List<BackpackItemDto> backpack
+) { }

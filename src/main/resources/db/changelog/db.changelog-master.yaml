@@ -1,0 +1,83 @@
+databaseChangeLog:
+  - changeSet:
+      id: DB-SCHEMA
+      author: mrrevo
+      changes:
+        - createTable:
+            tableName: equipments
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: helmet
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    unique: false
+              - column:
+                  name: armor
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    unique: false
+              - column:
+                  name: shoes
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    unique: false
+              - column:
+                  name: pants
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    unique: false
+              - column:
+                  name: weapon
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    unique: false
+              - column:
+                  name: shield
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    unique: false
+        - createTable:
+            tableName: equipments_backpacks_items
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: item_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    unique: false
+              - column:
+                  name: equipment_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    unique: false
+        - addForeignKeyConstraint:
+            constraintName: fk_equipments_backpacks_items
+            baseTableName: equipments_backpacks_items
+            baseColumnNames: equipment_id
+            referencedTableName: equipments
+            referencedColumnNames: id
+            onUpdate: CASCADE
+            onDelete: CASCADE

@@ -1,0 +1,10 @@
+package com.lastcivilization.equipmentwriteservice.infrastructure.service.item;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+record Item(
+        @JsonProperty("type")
+        String type
+) { }
